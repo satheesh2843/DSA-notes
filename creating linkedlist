@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+// define node memory
+struct lnode{
+  int data;
+  struct lnode* next; // self referential structure
+};
+
+typedef struct lnode node; 
+
+node* head=NULL;
+
+void insert(int val){
+  node*newnode=(node*)malloc(sizeof(node));  // creating space
+
+  newnode->data=val;    // assign value to node using  pointer varible
+  
+//(*newnode).data=val;    // assign value to node using variable  
+
+  if(head==NULL){
+    newnode->next=NULL;
+    head=newnode;
+  }
+  else{
+    newnode->next=head;
+    head=newnode;
+  }
+}
+
+void display(){
+  node* t=head;
+  while(t!=NULL){
+    printf("%d ",t->data);
+    t=t->next;
+  }
+}
+int main(){
+  int n,val;
+  scanf("%d",&n);
+  for(int i=0;i<n;i++){
+    scanf("%d",&val);
+    insert(val);  // calling function
+  }
+  display();  // calling function to display the node value
+}
