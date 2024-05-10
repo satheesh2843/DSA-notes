@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct lnode{
+  int data;
+  struct lnode * next;
+  struct lnode* prev;
+};
+
+
+typedef struct lnode node;
+
+node * head= NULL;
+node * tail= NULL;
+
+void insert(int val){
+  node* newnode =(node*)malloc(sizeof(node));
+  
+  newnode->data=val;
+  newnode->next=head;
+  if(head==NULL)
+    tail=newnode;
+  else
+    head->prev=newnode;
+  head=newnode;
+}
+
+void display(){
+  node* t=head;
+  while(t!=NULL){
+    printf("%d ",t->data);
+    t=t->next;
+  }
+}
+
+void mid(int p,int val){
+  node* newnode =(node*)malloc(sizeof(node));
+  newnode->data=val;
+  // p-=1;
+  node* te=head;
+  while(p){
+    te=te->next;
+    p-=1;
+    if(te==NULL){
+      printf("not possible!!!!!!!!!!");
+      return 0;
+    }
+  }
+  newnode->next=te->next;
+  te->next=newnode;
+  newnode->prev=te;
+  newnode->next->prev=newnode;
+  display();
+}
+
+int main(){
+  int n,val;
+  scanf("%d",&n);
+  for(int i=0;i<n;i++){
+    scanf("%d",&val);
+    insert(val);
+  }
+  display();
+  printf("\n");
+  int p,v;
+  scanf("%d %d",&p,&v);
+  mid(p,v);
+  
+  
+}
