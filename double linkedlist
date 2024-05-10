@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+
+struct lnode {                 // define of duble linkedlist
+  int data;
+  struct lnode *prev;
+  struct lnode *next;
+};
+
+
+typedef struct lnode node;
+
+node *head= NULL;   // assign head && tail value is NULL
+node* tail=NULL;
+
+
+void insert(int val){                            // insert valuse at beginning
+  node *newnode=(node*)malloc(sizeof(node));
+  newnode->data = val;
+  newnode->next=head;
+  if(head==NULL)
+    tail=newnode;
+  else
+    head->prev=newnode;
+  head=newnode;
+  newnode->prev=NULL;
+}
+
+void display(){             // display value using tail variable
+  node * t=tail;
+  while(t!=NULL){
+    printf("%d \n",t->data);
+    t=t->prev;
+  }
+}
+
+void display(){              // display value using head variable
+  node * t=head;
+  while(t!=NULL){
+    printf("%d \n",t->data);
+    t=t->next;
+  }
+}
+int main(){
+  int n,p,val;
+  scanf("%d",&n);
+  for(int i=0;i<n;i++){
+    scanf("%d",&p);
+    insert(p);           // function call 
+  }
+  display();            // function call
+}
